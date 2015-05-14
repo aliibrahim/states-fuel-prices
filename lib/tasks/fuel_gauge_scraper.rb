@@ -1,10 +1,7 @@
 require 'mechanize'
-require 'assets/us_states'
 
 class FuelGaugeScraper
   class << self
-
-    include USStates
 
     @@agent = Mechanize.new
     GAS_PRICES_PAGE_URL = 'http://fuelgaugereport.aaa.com/todays-gas-prices/'
@@ -39,6 +36,10 @@ class FuelGaugeScraper
         [state_name,regular_price]
       end
       Hash[results]
+    end
+
+    def list_of_states
+      YAML.load_file(Rails.root.join("lib/assets/states.yml"))
     end
   end
 end
