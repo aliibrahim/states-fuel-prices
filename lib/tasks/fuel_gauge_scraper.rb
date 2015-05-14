@@ -34,6 +34,8 @@ class FuelGaugeScraper
       results = data.map do |state|
         state_name = state.css("td.state").text
         regular_price = state.css("td.price").first.text
+        Price.find_or_create_by(state: state_name, regular: regular_price.delete("$"), recorded_at: Date.today)
+
         [state_name,regular_price]
       end
       Hash[results]

@@ -1,6 +1,10 @@
 class Price < ActiveRecord::Base
 
-  attr_reader :state, :regular, :mid, :premium, :diesel
-  validate_uniqueness_of :state
+  self.connection #For creating connection with DB using PostGres Adapater
+  include ActiveModel::Validations # For validating attributes
+
+  attr_reader :state, :regular, :recorded_at
+  validates :state, uniqueness: { scope: :recorded_at,
+     message: "should happen once per day" }
 
 end
