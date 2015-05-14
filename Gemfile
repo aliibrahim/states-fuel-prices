@@ -21,6 +21,10 @@ group :development do
   gem 'byebug' # For debugging the application
 end
 
+group :test do
+  gem 'rspec-rails'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
