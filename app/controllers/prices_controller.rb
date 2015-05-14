@@ -1,4 +1,4 @@
-require 'tasks/fuel_gauge_scraper'
+require 'tasks/fuel_gauge'
 
 class PricesController < ApplicationController
 
@@ -6,7 +6,7 @@ class PricesController < ApplicationController
   include ActionView::Layouts # For rendering layouts
 
   def index
-    @prices = FuelGaugeScraper.fuel_data(params[:state])
+    @prices = FuelGauge.fuel_data(params[:state])
     return render json: "Not Found", status: 400 unless @prices.present?
     render json: @prices
   end

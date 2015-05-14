@@ -1,14 +1,14 @@
 require 'mechanize'
 
-class FuelGaugeScraper
+class FuelGauge
   class << self
 
     @@agent = Mechanize.new
     GAS_PRICES_PAGE_URL = 'http://fuelgaugereport.aaa.com/todays-gas-prices/'
 
     def fuel_data(query= nil)
-      data = Rails.cache.fetch("fuel_data", expires_in: 30.seconds) do
-        build_hash(all_states_data)
+      data = Rails.cache.fetch("states_with_prices", expires_in: 30.seconds) do
+        build_hash(get_states_data)
       end
       if query.present?
         state_name = list_of_states[query]
@@ -19,7 +19,7 @@ class FuelGaugeScraper
 
     private
 
-    def all_states_data
+    def get_states_data
       main_page =  @@agent.get(GAS_PRICES_PAGE_URL)
       states_table_uri = main_page.iframe_with(:src => /state/).uri
       states_table_url = main_page.uri.merge(states_table_uri)
