@@ -4,7 +4,8 @@ class Price < ActiveRecord::Base
   include ActiveModel::Validations # For validating attributes
 
   attr_reader :state, :regular, :recorded_at
-  validates :state, uniqueness: { scope: :recorded_at,
-     message: "should happen once per day" }
+
+  validates :state, uniqueness: { scope: :recorded_at }, presence: true
+  validates :regular, presence: true
 
 end
