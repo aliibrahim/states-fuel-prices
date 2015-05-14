@@ -28,7 +28,9 @@ Make Sure you have PostGres Installed on your machine.
  The application uses `memory_store` as the cache store.
 
 ###   Deployment instructions
- Run `bundle exec rails s` in the local repo to start the server on your local machine and point to `http://localhost:3000` to run the application.
+ 1. Run `clockwork clock.rb` so that it should run the clock and 
+ 2. Run `bundle exec rails s` in the local repo to start the server on your local machine and point to `http://localhost:3000` to run the application.
+ 
 * ...
 
 
