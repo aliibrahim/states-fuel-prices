@@ -22,6 +22,6 @@ module GasPrice
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.cache_store = :file_store, "./cache" #use FileStore caching system since clockwork has to write to cache as well
+    config.cache_store = :file_store, "./tmp" #use FileStore caching system since clockwork has to write to cache as well
   end
 end

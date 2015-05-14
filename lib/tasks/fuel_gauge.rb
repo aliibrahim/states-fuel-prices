@@ -8,7 +8,9 @@ class FuelGauge
     CACHE_KEYNAME = "states_with_prices"
 
     def fuel_data(query= nil)
-      data = Rails.cache.read(CACHE_KEYNAME)
+      data = Rails.cache.fetch(CACHE_KEYNAME) do
+        data_for_all_states
+      end
       if query.present?
         state_name = list_of_states[query.upcase]
         data = data.select{|name, price| name == state_name}
@@ -24,8 +26,8 @@ class FuelGauge
 
         [state_name,regular_price]
       end
-      Hash[results]
       Rails.cache.write(CACHE_KEYNAME, Hash[results])
+      Hash[results]
     end
 
     def states_table_from_source
