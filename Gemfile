@@ -7,10 +7,12 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
+gem 'mechanize' # For scraping
 
-gem 'pg'
 
-
+group :development do
+  gem 'byebug' # For debugging the application
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
