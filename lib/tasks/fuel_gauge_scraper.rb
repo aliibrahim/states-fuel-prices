@@ -9,40 +9,34 @@ class FuelGaugeScraper
     @@agent = Mechanize.new
     GAS_PRICES_PAGE_URL = 'http://fuelgaugereport.aaa.com/todays-gas-prices/'
 
-    def fuel_data(query=nil)
-      data = if query.nil?
-        all_states
-      else
-        state_name = list_of_states[query]
-        state(state_name) if state_name.present?
+    def fuel_data(query= nil)
+      data = Rails.cache.fetch("fuel_data", expires_in: 30.seconds) do
+        build_hash(all_states_data)
       end
-      results_json(data) if data.present?
+      if query.present?
+        state_name = list_of_states[query]
+        data = data.select{|name, price| name == state_name}
+      end
+      data.to_json
     end
 
     private
 
-    def states_table
-      @main_page ||= @@agent.get(GAS_PRICES_PAGE_URL)
-      states_table_uri = @main_page.iframe_with(:src => /state/).uri
-      states_table_url = @main_page.uri.merge(states_table_uri)
-      @@agent.get(states_table_url)
+    def all_states_data
+      main_page =  @@agent.get(GAS_PRICES_PAGE_URL)
+      states_table_uri = main_page.iframe_with(:src => /state/).uri
+      states_table_url = main_page.uri.merge(states_table_uri)
+      page = @@agent.get(states_table_url)
+      page.search("//table[@id='states']/tbody/tr")
     end
 
-    def all_states
-      states_table.search("table#states tbody tr")
-    end
-
-    def state(state)
-      states_table.search("//table[@id='states']//td[@class='state']/a[text()[contains(.,'#{state}')]]/../..")
-    end
-
-    def results_json(data)
+    def build_hash(data)
       results = data.map do |state|
         state_name = state.css("td.state").text
         regular_price = state.css("td.price").first.text
         [state_name,regular_price]
       end
-      Hash[results].to_json
+      Hash[results]
     end
   end
 end

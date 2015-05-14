@@ -14,6 +14,7 @@ class Prices
 $ = jQuery
 $ ->
   $('#price-button').click ->
+    $('#prices-data').empty()
     event.preventDefault()
     state_value = $('#state').val()
     if !state_value.length || state_value.length == 2
@@ -28,3 +29,12 @@ $ ->
           alert "No prices found!"
     else
       alert("State Name should be only 2 characters. E.g.: 'NY' or 'NJ'. Try Again!")
+
+# These are use to display message to the server that data is being loaded
+  loader_msg = $('#loading-prices')
+  loader_msg.hide()
+
+  $(document).on 'ajaxStart', ->
+    loader_msg.show()
+  $(document).on 'ajaxStop', ->
+    loader_msg.hide()
