@@ -15,6 +15,8 @@ gem 'coffee-rails'
 
 gem 'pg'
 
+gem 'clockwork'
+
 group :development do
   gem 'byebug' # For debugging the application
 end

@@ -21,7 +21,7 @@
 *swp
 node_modules/
 .powder
-
+cache/*/
 disk/
 .idea
 public/assets
