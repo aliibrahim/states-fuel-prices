@@ -1,13 +1,19 @@
-%h1 Welcome to Today's Gas Fuel Prices
+%h1 Today Fuel Prices
 
-= form_tag prices_path, method: :get do
+%form
   %label Enter State:
-  %input{name: "state"}
+  %input#state
 
-  = button_tag
+  %button#price-button Get Today's Price!
+  %span
+    %i Example: "NJ" or "NY" (Leave blank for all states!)
 
-%table
+%br
+%table#prices
   %th
     %tr
-      %td State Name
-      %td Regular Price
+      %td{colspan: '3'}
+        %strong State Name
+      %td
+        %strong Price
+  %tbody#prices-data

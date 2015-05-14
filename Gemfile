@@ -9,6 +9,11 @@ gem 'spring', :group => :development
 
 gem 'mechanize' # For scraping
 
+gem 'haml-rails' # Template rendering engine.
+gem 'jquery-rails'
+gem 'coffee-rails'
+
+gem 'pg'
 
 group :development do
   gem 'byebug' # For debugging the application

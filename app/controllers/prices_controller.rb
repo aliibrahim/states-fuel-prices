@@ -13,7 +13,7 @@ class PricesController < ApplicationController
 
   def states
     respond_to do |format|
-      format.html {render layout: "prices"}
+      format.html {render layout: "application"}
     end
   end
 end
