@@ -1,0 +1,13 @@
+%h1 Welcome to Today's Gas Fuel Prices
+
+= form_tag prices_path, method: :get do
+  %label Enter State:
+  %input{name: "state"}
+
+  = button_tag
+
+%table
+  %th
+    %tr
+      %td State Name
+      %td Regular Price
