@@ -8,7 +8,8 @@ module Clockwork
     puts "Running #{job}"
   end
 
+  #Fetch fuel prices for all states at every night at 12:00 and rewrite the cache.
   every(1.day, 'Fetch prices from the server', :at => '00:00') do
-    FuelGauge.data_for_all_states #fetch fuel prices for all states at every night at 12:00 and rewrite the cache.
+    FuelGauge.data_for_all_states
   end
 end

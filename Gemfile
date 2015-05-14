@@ -13,7 +13,7 @@ gem 'haml-rails' # Template rendering engine.
 gem 'jquery-rails'
 gem 'coffee-rails'
 
-gem 'pg'
+gem 'pg' #For persisting data in DB
 
 gem 'clockwork'
 

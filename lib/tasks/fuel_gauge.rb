@@ -10,10 +10,10 @@ class FuelGauge
     def fuel_data(query= nil)
       data = Rails.cache.read(CACHE_KEYNAME)
       if query.present?
-        state_name = list_of_states[query]
+        state_name = list_of_states[query.upcase]
         data = data.select{|name, price| name == state_name}
       end
-      data.to_json
+      data.to_json if data.present?
     end
 
     def data_for_all_states

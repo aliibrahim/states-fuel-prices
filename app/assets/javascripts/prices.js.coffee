@@ -1,6 +1,7 @@
 class Prices
 
   this.prices_data = (table_data, data) ->
+    # Append the data fetched from the server to the table.
     table_data.empty()
     $.each data, (state, price) ->
       row =
@@ -14,10 +15,10 @@ class Prices
 $ = jQuery
 $ ->
   $('#price-button').click ->
-    $('#prices-data').empty()
+    $('#prices-data').empty() #empty the table before populating it again.
     event.preventDefault()
     state_value = $('#state').val()
-    if !state_value.length || state_value.length == 2
+    if !state_value.length || state_value.length == 2 #check for invalid state name
       query_data = if !!state_value then {state: state_value} else {}
       $.ajax
         url: "/prices"
