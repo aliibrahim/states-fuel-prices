@@ -14,7 +14,7 @@ class Prices
 
 $ = jQuery
 $ ->
-  $('#price-button').click ->
+  $('#price-button').click (event) ->
     $('#prices-data').empty() #empty the table before populating it again.
     event.preventDefault()
     state_value = $('#state').val()
