@@ -1,4 +1,6 @@
-# README
+# Fuel Prices
+
+<a href="https://codeclimate.com/repos/55631083e30ba0129c002889/feed"><img src="https://codeclimate.com/repos/55631083e30ba0129c002889/badges/61d9befc93fe8bef8bce/gpa.svg" /></a>
 
 State Fuel Prices is built using Rails-API gem that fetches data using Mechanize from FuelGaugeReport.aaa.com. It exposes an API at 
 `http://localhost:3000/prices.json` that returns information of unleaded regular prices of all the states.
